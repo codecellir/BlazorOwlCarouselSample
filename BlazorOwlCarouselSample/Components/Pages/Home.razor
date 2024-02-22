@@ -1,0 +1,104 @@
+﻿@page "/"
+<style>
+    .item {
+        width: 200px;
+        height: 200px;
+        background: #4DC7A0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<PageTitle>Home</PageTitle>
+
+<h1>Follow Codecell.ir</h1>
+
+<div class="container">
+    <OwlCarousel Option="_option">
+
+        <div class="item">
+            <span>1</span>
+        </div>
+        <div class="item">
+            <span>2</span>
+        </div>
+        <div class="item">
+            <span>3</span>
+        </div>
+        <div class="item">
+            <span>4</span>
+        </div>
+        <div class="item diff">
+            <span>5</span>
+        </div>
+        <div class="item">
+            <span>6</span>
+        </div>
+        <div class="item">
+            <span>7</span>
+        </div>
+        <div class="item">
+            <span>8</span>
+        </div>
+        <div class="item">
+            <span>9</span>
+        </div>
+        <div class="item">
+            <span>10</span>
+        </div>
+        <div class="item">
+            <span>11</span>
+        </div>
+        <div class="item">
+            <span>12</span>
+        </div>
+    </OwlCarousel>
+</div>
+
+@code{
+    OwlOption _option = new()
+        {
+            Center = true,
+            Loop = true,
+            Items = 3,
+            Marging = 10,
+            AutoWidth = false,
+            AutoHeight = true,
+            Rtl = true,
+            Autoplay = true,
+            AutoplayHoverPause = true,
+            AutoplayTimeout = 800,
+            Dots = true,
+            Nav = true,
+            Responsive = [
+                     new(){
+                        ViewSize=0,
+                         Items=1,
+                        Center=true,
+                        Loop=true,
+                        Nav=true,
+                     }
+                     , new(){
+                        ViewSize=300,
+                         Items=2,
+                        Center=true,
+                        Loop=true,
+                        Nav=true,
+                     } ,
+                     new(){
+                        ViewSize=600,
+                         Items=3,
+                        Center=true,
+                        Loop=true,
+                        Nav=true,
+                     } ,
+                     new(){
+                        ViewSize=1000,
+                         Items=5,
+                        Center=true,
+                        Loop=true,
+                        Nav=true,
+                     }
+                             ]
+        };
+}

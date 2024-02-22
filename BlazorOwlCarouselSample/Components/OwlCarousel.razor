@@ -1,0 +1,51 @@
+﻿<SectionContent SectionName="owl-style">
+    <link href="/bootstrap/icons/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="/owlcarousel/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="/owlcarousel/css/owl.theme.default.min.css" rel="stylesheet" />
+</SectionContent>
+
+<SectionContent SectionName="owl-js">
+    <script src="/jquery-3.7.1.min.js"></script>
+    <script src="/owlcarousel/js/owl.carousel.min.js"></script>
+</SectionContent>
+
+<style>
+    .hide-nav .owl-nav {
+        display: none;
+    }
+</style>
+<div class="owl-carousel owl-theme @_calsses" id="@_identifier">
+    @ChildContent
+</div>
+
+@code {
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public OwlOption Option { get; set; } = new();
+
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; }
+
+    private IJSObjectReference _jsModule;
+
+    string _identifier = Guid.NewGuid().ToString();
+
+    string _calsses;
+
+    protected override void OnInitialized()
+    {
+        if (!Option.Nav)
+        {
+            _calsses += "hide-nav ";
+        }
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./OwlCarousel/js/init.js");
+            await _jsModule.InvokeVoidAsync("initOwl", _identifier, Option);
+        }
+    }
+}
